@@ -2,6 +2,7 @@ package com.juiceshop.test.executionservice.steps;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 
 import com.juiceshop.test.executionservice.pages.Homepage;
 import io.cucumber.java.en.Given;
@@ -32,10 +33,28 @@ public class HomePageStepDef {
     assertThat(itemsPerPageNumber, is(itemsPerPageSelected));
   }
 
-  @Given("Home page should display all items")
-  public void homePageShouldDisplayAllItems() {
-    String maxNumberOfItemsAvailable = homepage.getPaginatorRange().split(" ")[4];
-    int itemsDisplayed = homepage.getAllItemsDisplayed().size();
-    assertThat(String.valueOf(itemsDisplayed), is(maxNumberOfItemsAvailable));
+  @Given("Home page should display all {int} items")
+  public void homePageShouldDisplayAllItems(int maxNumberOfItemsExpected) {
+    assertThat(homepage.getAllItemsDisplayed().size(), is(maxNumberOfItemsExpected));
+  }
+
+  @Given("User clicks the product no {int}")
+  public void clickOnGivenProduct(int productNo) {
+    homepage.getAllItemsDisplayed().get(productNo - 1).click();
+  }
+
+  @Given("Product popup should be displayed")
+  public void verifyThatProductPopupDisplayed() {
+    assertThat(homepage.isItemPopupDisplayed(), is(true));
+  }
+
+  @Given("User expands the review section")
+  public void expandsTheReviewSection() {
+    homepage.expandReviewSectionInProductPopup();
+  }
+
+  @Given("Reviews should be displayed")
+  public void verifyTheNoOfReviews() {
+    assertThat(homepage.getAllReviews().size(), greaterThan(0));
   }
 }
