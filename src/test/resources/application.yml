@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: ERROR
+    com.juiceshop: INFO
+
+automation:
+  browser: chrome
+  url: https://juice-shop.herokuapp.com
