@@ -1,6 +1,7 @@
 package com.juiceshop.test.executionservice.pages;
 
 import java.util.List;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.*;
@@ -22,10 +23,15 @@ public class Homepage extends BasePage {
 
   public By backToHomepage = new ByXPath("//button[@aria-label='Back to homepage']");
   public By itemsPerPageBtn = new ByXPath("//mat-select[@aria-label='Items per page:']");
-  public By itemsPerPageNumber = new ByXPath("//mat-select[@aria-label='Items per page:']//span/span");
+  public By itemsPerPageNumber =
+      new ByXPath("//mat-select[@aria-label='Items per page:']//span/span");
   public By itemsPerPageOptions = new ByTagName("mat-option");
   public By paginatorRange = new ByClassName("mat-paginator-range-label");
   public By allItems = new ByTagName("mat-grid-tile");
+  public By itemPopup = new ByTagName("mat-dialog-container");
+  public By reviewSectionExpandBtn = new ByXPath("//mat-expansion-panel");
+  public By reviewSectionPanelContent = new ByXPath("//mat-panel-title");
+  public By allReviews = new ByXPath("//div[@class='ng-star-inserted']/div");
   public By dismissCookieMessageBtn = new ByXPath("//a[@aria-label='dismiss cookie message']");
   public By closeWelcomeBannerBtn = new ByXPath("//button[@aria-label='Close Welcome Banner']");
 
@@ -61,5 +67,24 @@ public class Homepage extends BasePage {
 
   public void closeWelcomeBanner() {
     click(closeWelcomeBannerBtn);
+  }
+
+  public boolean isItemPopupDisplayed() {
+    try {
+      wait.until(ExpectedConditions.visibilityOfElementLocated(itemPopup));
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public void expandReviewSectionInProductPopup() {
+    WebElement element = findElement(reviewSectionPanelContent);
+    wait.until(d -> !element.getText().replaceAll("[^0-9]", "").isEmpty());
+    click(reviewSectionPanelContent);
+  }
+
+  public List<WebElement> getAllReviews() {
+    return findElements(allReviews);
   }
 }
