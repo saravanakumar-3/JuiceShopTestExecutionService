@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
-import com.juiceshop.test.executionservice.pages.Homepage;
+import com.juiceshop.test.executionservice.pages.HomePage;
 import io.cucumber.java.en.Given;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Log4j2
 public class HomePageStepDef {
-  @Autowired Homepage homepage;
+  @Autowired
+  HomePage homepage;
 
   @Given("User navigates to Home page")
   public void navigateToHomePage() {
-    homepage.launchApplication();
+    homepage.launchHomePage();
     homepage.dismissCookieMessage();
     homepage.closeWelcomeBanner();
   }
