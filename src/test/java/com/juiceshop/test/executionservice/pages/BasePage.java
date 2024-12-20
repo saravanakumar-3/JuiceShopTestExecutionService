@@ -12,14 +12,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
   protected final WebDriver driver;
-  Wait<WebDriver> wait;
+  protected final JavascriptExecutor js;
+  protected final Wait<WebDriver> wait;
 
   public BasePage(WebDriver driver) {
     this.driver = driver;
+    js = (JavascriptExecutor) driver;
     wait = new WebDriverWait(driver, Duration.ofSeconds(5));
   }
 
   protected WebElement findElement(By by) {
+    wait.until(ExpectedConditions.presenceOfElementLocated(by));
     return driver.findElement(by);
   }
 
@@ -31,5 +34,9 @@ public class BasePage {
     wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     wait.until(ExpectedConditions.elementToBeClickable(by));
     findElement(by).click();
+  }
+
+  protected void sendKeys(By by, String value) {
+    findElement(by).sendKeys(value);
   }
 }
