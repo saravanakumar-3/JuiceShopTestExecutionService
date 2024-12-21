@@ -10,11 +10,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.List;
-
 import lombok.extern.log4j.Log4j2;
-import org.awaitility.Awaitility;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,16 +35,19 @@ public class HomePageStepDef extends BaseStepDef {
     homepage.click(maxElement);
     String itemsPerPageNumber = homepage.getItemsPerPageNumber();
     assertThat(itemsPerPageNumber, is(itemsPerPageSelected));
+    log.info("Number of items per page is set to " + itemsPerPageNumber);
   }
 
   @Given("Home page should display all {int} items")
   public void homePageShouldDisplayAllItems(int maxNumberOfItemsExpected) {
     assertThat(homepage.getAllItems().size(), is(maxNumberOfItemsExpected));
+    log.info(maxNumberOfItemsExpected + " items are displayed Home Page");
   }
 
   @Given("User clicks the product no {int}")
   public void clickOnGivenProduct(int productNo) {
     homepage.clickOnItem(productNo);
+    log.info("Clicked on product no " + productNo);
   }
 
   @Given("Product popup should be displayed")
@@ -63,6 +63,7 @@ public class HomePageStepDef extends BaseStepDef {
   @Given("Reviews should be displayed")
   public void verifyTheNoOfReviews() {
     assertThat(homepage.getAllReviews().size(), greaterThan(0));
+    log.info("Reviews are getting displayed in Product popup");
   }
 
   @Then("User add items to Basket and item count reflected correctly")
@@ -71,12 +72,21 @@ public class HomePageStepDef extends BaseStepDef {
     List<String> allItemNames = homepage.getAllItemNames();
     List<BigDecimal> allItemPrices = homepage.getAllItemPrices();
 
-    for (int i = 0; i < 5; i++) {
-      homepage.waitForInfoBarToDisappear();
+    int noOfItemsToAdd = 5;
+    int noOfItemsToAdded = 0;
+    for (int i = 0; i < noOfItemsToAdd; i++) {
+      if (homepage.isItemSoldOut(i + 1)) {
+        ++noOfItemsToAdd;
+        continue;
+      }
+
       homepage.addItemNoToBasket(i + 1);
+      ++noOfItemsToAdded;
       String itemName = allItemNames.get(i);
       assertThat(homepage.getInfoBarText(), is("Placed " + itemName + " into basket."));
-      homepage.waitTillNoOfItemsInTheBasketUpdatedTo(i + 1);
+      homepage.dismissInfoBar();
+      homepage.waitTillNoOfItemsInTheBasketUpdatedTo(noOfItemsToAdded);
+      log.info("Item '" + itemName + "' is added to Basket");
 
       Item item = new Item();
       item.setName(itemName);

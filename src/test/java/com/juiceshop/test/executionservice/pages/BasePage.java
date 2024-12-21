@@ -66,4 +66,8 @@ public class BasePage {
     }
     return text;
   }
+
+  protected void scrollIntoView(By by) {
+    js.executeScript("arguments[0].scrollIntoView(true);", findElement(by));
+  }
 }

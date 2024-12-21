@@ -1,7 +1,5 @@
-package com.juiceshop.test.executionservice.config;
+package com.juiceshop.test.executionservice.model;
 
-import com.juiceshop.test.executionservice.model.Basket;
-import com.juiceshop.test.executionservice.model.User;
 import io.cucumber.spring.ScenarioScope;
 import lombok.Data;
 import org.springframework.stereotype.Component;

@@ -9,8 +9,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.Map;
+
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Log4j2
 public class LoginPageStepDef extends BaseStepDef {
   @Autowired LoginPage loginPage;
 
@@ -24,6 +27,7 @@ public class LoginPageStepDef extends BaseStepDef {
     User user = testData.getUser();
     login(user.getEmail(), user.getPassword());
     assertThat(loginPage.isAccountBtnDisplayed(), is(true));
+    log.info("User logged in successfully");
   }
 
   @When("User logins with below credentials")

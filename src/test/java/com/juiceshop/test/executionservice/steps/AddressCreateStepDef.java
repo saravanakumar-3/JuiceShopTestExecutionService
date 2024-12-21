@@ -3,8 +3,10 @@ package com.juiceshop.test.executionservice.steps;
 import com.github.javafaker.Address;
 import com.juiceshop.test.executionservice.pages.AddressCreatePage;
 import io.cucumber.java.en.And;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Log4j2
 public class AddressCreateStepDef extends BaseStepDef {
   @Autowired AddressCreatePage addressCreatePage;
 
@@ -13,11 +15,12 @@ public class AddressCreateStepDef extends BaseStepDef {
     Address address = faker.address();
     addressCreatePage.enterCountry(address.country());
     addressCreatePage.enterName(address.firstName());
-    addressCreatePage.enterMobile(faker.number().digits(10));
-    addressCreatePage.enterZip(faker.number().digits(7));
+    addressCreatePage.enterMobile(getRandomNumber(10));
+    addressCreatePage.enterZip(getRandomNumber(7));
     addressCreatePage.enterAddress(address.fullAddress());
     addressCreatePage.enterCity(address.city());
     addressCreatePage.enterState(address.state());
     addressCreatePage.clickSubmitBtn();
+    log.info("New address is created");
   }
 }

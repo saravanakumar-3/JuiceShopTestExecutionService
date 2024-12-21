@@ -25,13 +25,8 @@ Feature: Happy path of Juice-Shop
 
   @SystemTest
   Scenario: Validate basket and payment functionality
-    Given User navigates to User Registration page
-    When User leave all field empty with entering any input after clicking
-    Then Validation message should be displayed in all respective fields
-    And User enters valid information in all fields and Registers
-    Then User should be navigated to Login page
-    And User should be able to login with credentials registered previously
-    Then User add items to Basket and item count reflected correctly
+    Given User completes Registration and Login successfully
+    When User add items to Basket and item count reflected correctly
     And User clicks on Your Basket
     Then All items added are displayed in basket
     And Total price is updated when item quantity is increased or decreased or deleted

@@ -13,7 +13,8 @@ public class OrderSummaryPage extends BasePage {
   }
 
   protected final By orderSummaryHeader = By.className("order-summary");
-  protected final By placeYourOrderAndPayBtn = By.xpath("//button[@aria-label='Complete your purchase']");
+  protected final By placeYourOrderAndPayBtn =
+      By.xpath("//button[@aria-label='Complete your purchase']");
 
   public boolean isOrderSummaryDisplayed() {
     return findElement(orderSummaryHeader).isDisplayed();

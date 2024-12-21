@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +21,7 @@ public class HomePage extends CommonPage {
   public By allItems = By.tagName("mat-grid-tile");
   public By allItemNames = By.className("item-name");
   public By allItemPrices = By.className("item-price");
+  public final String soldOut = "//mat-grid-tile[${ItemNumber}]//span[text()='Sold Out']";
   public By allAddToBasketBtns = By.xpath("//button[@aria-label='Add to Basket']");
   public By itemPopup = By.tagName("mat-dialog-container");
   public By reviewSectionPanelContent = By.xpath("//mat-panel-title");
@@ -93,5 +92,15 @@ public class HomePage extends CommonPage {
 
   public void waitTillNoOfItemsInTheBasketUpdatedTo(int i) {
     wait.until(d -> getNoOfItemsInTheBasket() == i);
+  }
+
+  public boolean isItemSoldOut(int i) {
+    String path = soldOut.replace("${ItemNumber}", String.valueOf(i));
+    try {
+      driver.findElement(By.xpath(path));
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 }

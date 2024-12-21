@@ -83,7 +83,6 @@ public class BasketPage extends CommonPage {
   }
 
   public void clickCheckout() {
-    js.executeScript("arguments[0].scrollIntoView(true);", findElement(checkout));
     click(checkout);
   }
 

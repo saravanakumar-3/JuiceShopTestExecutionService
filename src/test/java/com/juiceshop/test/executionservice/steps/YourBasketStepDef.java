@@ -9,8 +9,10 @@ import com.juiceshop.test.executionservice.pages.AddressSelectPage;
 import com.juiceshop.test.executionservice.pages.BasketPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Log4j2
 public class YourBasketStepDef extends BaseStepDef {
   @Autowired BasketPage basketPage;
   @Autowired AddressSelectPage addressSelectPage;

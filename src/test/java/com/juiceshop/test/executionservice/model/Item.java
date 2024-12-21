@@ -1,9 +1,7 @@
 package com.juiceshop.test.executionservice.model;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import lombok.Data;
 
 @Data
 public class Item {

@@ -2,6 +2,8 @@ package com.juiceshop.test.executionservice.pages;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +21,8 @@ public class CommonPage extends BasePage {
   protected By dismissCookieMessageBtn = By.xpath("//a[@aria-label='dismiss cookie message']");
   protected By closeWelcomeBannerBtn = By.xpath("//button[@aria-label='Close Welcome Banner']");
   protected By infoBar = By.xpath("//span[@class='mat-simple-snack-bar-content']");
+  protected By dismissInfoBar = By.xpath("//span[text()='X']");
+  protected By forcePageReload = By.xpath("//span[text()='Force page reload']");
   protected By navbarAccount = By.id("navbarAccount");
   protected By noOfItemsInBasket =
       By.xpath("//button[@aria-label='Show the shopping cart']/span/span[2]");
@@ -43,7 +47,8 @@ public class CommonPage extends BasePage {
   }
 
   public String getInfoBarText() {
-    return findElement(infoBar).getText();
+    wait.until(d -> !getText(infoBar).isEmpty());
+    return getText(infoBar);
   }
 
   public boolean isAccountBtnDisplayed() {
@@ -60,5 +65,13 @@ public class CommonPage extends BasePage {
 
   public void waitForInfoBarToDisappear() {
     wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(infoBar)));
+  }
+
+  public void dismissInfoBar() {
+    click(dismissInfoBar);
+  }
+
+  public void clickForcePageReload() {
+    click(forcePageReload);
   }
 }

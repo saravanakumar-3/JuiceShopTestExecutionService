@@ -1,24 +1,26 @@
 package com.juiceshop.test.executionservice.steps;
 
 import com.github.javafaker.Faker;
-import com.juiceshop.test.executionservice.config.TestData;
 import com.juiceshop.test.executionservice.model.Item;
+import com.juiceshop.test.executionservice.model.TestData;
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import org.awaitility.Awaitility;
+import org.openqa.selenium.TakesScreenshot;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseStepDef {
   @Autowired protected TestData testData;
-  protected Faker faker = new Faker();
+  protected static Faker faker = new Faker();
 
   public static BigDecimal calculateTotalPrice(List<Item> items) {
     return items.stream()
-            .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-            .reduce(BigDecimal::add)
-            .get();
+        .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+        .reduce(BigDecimal::add)
+        .get();
+  }
+
+  public static String getRandomNumber(int noOfDigits) {
+    return faker.number().digits(noOfDigits).replaceFirst("0", "1");
   }
 }
