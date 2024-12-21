@@ -16,16 +16,16 @@ public class UserRegistrationPage extends CommonPage {
     super(driver);
   }
 
-  public By email = new ById("emailControl");
-  public By password = new ById("passwordControl");
-  public By repeatPassword = new ById("repeatPasswordControl");
-  public By showPasswordAdviceBtn = new ByXPath("//span[@class='mat-slide-toggle-bar']");
+  public By email = By.id("emailControl");
+  public By password = By.id("passwordControl");
+  public By repeatPassword = By.id("repeatPasswordControl");
+  public By showPasswordAdviceBtn = By.xpath("//span[@class='mat-slide-toggle-bar']");
   public By securityQuestionSelectBtn =
-      new ByXPath("//div[@class='security-container']/mat-form-field[1]/div/div[1]");
-  public By securityQuestionOptions = new ByXPath("//mat-option");
-  public By securityAnswer = new ById("securityAnswerControl");
-  public By registerBtn = new ByXPath("//button[@id='registerButton']/span[1]");
-  public By errors = new ByTagName("mat-error");
+      By.xpath("//div[@class='security-container']/mat-form-field[1]/div/div[1]");
+  public By securityQuestionOptions = By.xpath("//mat-option");
+  public By securityAnswer = By.id("securityAnswerControl");
+  public By registerBtn = By.xpath("//button[@id='registerButton']/span[1]");
+  public By errors = By.tagName("mat-error");
 
   public void launchUserRegistrationPage() {
     launchPage(url + "/#/register");
@@ -62,7 +62,7 @@ public class UserRegistrationPage extends CommonPage {
             .filter(e -> e.getText().contains(securityQuestion))
             .findFirst()
             .orElseThrow(() -> new NoSuchElementException(securityQuestion));
-    element.click();
+    click(element);
   }
 
   public void toggleShowPasswordAdvice() {
@@ -71,9 +71,7 @@ public class UserRegistrationPage extends CommonPage {
 
   @SneakyThrows
   public void clickRegisterBtn() {
-    wait.until(
-        ExpectedConditions.not(
-            ExpectedConditions.visibilityOfElementLocated(languageChangedInfoBar)));
+    waitForInfoBarToDisappear();
     click(registerBtn);
   }
 }

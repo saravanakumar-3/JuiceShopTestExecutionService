@@ -15,16 +15,14 @@ public class CommonPage extends BasePage {
   @Value("${automation.url}")
   protected String url;
 
-  protected By backToHomepage = new By.ByXPath("//button[@aria-label='Back to homepage']");
-  protected By dismissCookieMessageBtn =
-      new By.ByXPath("//a[@aria-label='dismiss cookie message']");
-  protected By closeWelcomeBannerBtn =
-      new By.ByXPath("//button[@aria-label='Close Welcome Banner']");
-  protected By languageChangedInfoBar =
-      new By.ByXPath("//span[text()='Language has been changed to English']");
-  protected By registrationSuccessfullyInfoBar =
-      new By.ByXPath("//span[text()='Registration completed successfully. You can now log in.']");
-  protected By navbarAccount = new By.ById("navbarAccount");
+  protected By backToHomepage = By.xpath("//button[@aria-label='Back to homepage']");
+  protected By dismissCookieMessageBtn = By.xpath("//a[@aria-label='dismiss cookie message']");
+  protected By closeWelcomeBannerBtn = By.xpath("//button[@aria-label='Close Welcome Banner']");
+  protected By infoBar = By.xpath("//span[@class='mat-simple-snack-bar-content']");
+  protected By navbarAccount = By.id("navbarAccount");
+  protected By noOfItemsInBasket =
+      By.xpath("//button[@aria-label='Show the shopping cart']/span/span[2]");
+  protected By yourBasketBtn = By.xpath("//button[@aria-label='Show the shopping cart']");
 
   protected void launchPage(String url) {
     driver.get(url);
@@ -44,11 +42,23 @@ public class CommonPage extends BasePage {
     click(new By.ByTagName("html"));
   }
 
-  public boolean isRegistrationSuccessfulInfoBarDisplayed() {
-    return findElement(registrationSuccessfullyInfoBar).isDisplayed();
+  public String getInfoBarText() {
+    return findElement(infoBar).getText();
   }
 
-  public boolean isNavbarAccountBtnDisplayed() {
+  public boolean isAccountBtnDisplayed() {
     return findElement(navbarAccount).isDisplayed();
+  }
+
+  public int getNoOfItemsInTheBasket() {
+    return Integer.parseInt(findElement(noOfItemsInBasket).getText());
+  }
+
+  public void clickYourBasketBtn() {
+    click(yourBasketBtn);
+  }
+
+  public void waitForInfoBarToDisappear() {
+    wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(infoBar)));
   }
 }

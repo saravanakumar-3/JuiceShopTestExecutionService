@@ -1,10 +1,10 @@
 package com.juiceshop.test.executionservice.steps;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
 import com.github.javafaker.Faker;
-import com.juiceshop.test.executionservice.config.TestData;
 import com.juiceshop.test.executionservice.model.User;
 import com.juiceshop.test.executionservice.pages.UserRegistrationPage;
 import io.cucumber.java.en.And;
@@ -16,9 +16,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Log4j2
-public class UserRegistrationPageStepDef {
+public class UserRegistrationPageStepDef extends BaseStepDef {
   @Autowired UserRegistrationPage registrationPage;
-  @Autowired TestData testData;
 
   @Given("User navigates to User Registration page")
   public void navigateToUserRegistrationPage() {
@@ -59,12 +58,14 @@ public class UserRegistrationPageStepDef {
     registrationPage.toggleShowPasswordAdvice();
     registrationPage.clickEmptySpace();
     registrationPage.clickRegisterBtn();
-    registrationPage.isRegistrationSuccessfulInfoBarDisplayed();
+    assertThat(
+        registrationPage.getInfoBarText(),
+        is("Registration completed successfully. You can now log in."));
   }
 
   private User getNewRandomUser() {
-    Faker faker = new Faker();
     User user = new User();
+    user.setName(faker.name().fullName());
     user.setEmail(faker.internet().emailAddress());
     user.setPassword(faker.internet().password());
     user.setSecurityQuestion("Your favorite book?");

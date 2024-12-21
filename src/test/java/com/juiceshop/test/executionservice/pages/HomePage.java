@@ -1,9 +1,10 @@
 package com.juiceshop.test.executionservice.pages;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,16 +17,16 @@ public class HomePage extends CommonPage {
     super(driver);
   }
 
-  public By itemsPerPageBtn = new ByXPath("//mat-select[@aria-label='Items per page:']");
-  public By itemsPerPageNumber =
-      new ByXPath("//mat-select[@aria-label='Items per page:']//span/span");
-  public By itemsPerPageOptions = new ByTagName("mat-option");
-  public By paginatorRange = new ByClassName("mat-paginator-range-label");
-  public By allItems = new ByTagName("mat-grid-tile");
-  public By itemPopup = new ByTagName("mat-dialog-container");
-  public By reviewSectionExpandBtn = new ByXPath("//mat-expansion-panel");
-  public By reviewSectionPanelContent = new ByXPath("//mat-panel-title");
-  public By allReviews = new ByXPath("//div[@class='ng-star-inserted']/div");
+  public By itemsPerPageBtn = By.xpath("//mat-select[@aria-label='Items per page:']");
+  public By itemsPerPageNumber = By.xpath("//mat-select[@aria-label='Items per page:']//span/span");
+  public By itemsPerPageOptions = By.tagName("mat-option");
+  public By allItems = By.tagName("mat-grid-tile");
+  public By allItemNames = By.className("item-name");
+  public By allItemPrices = By.className("item-price");
+  public By allAddToBasketBtns = By.xpath("//button[@aria-label='Add to Basket']");
+  public By itemPopup = By.tagName("mat-dialog-container");
+  public By reviewSectionPanelContent = By.xpath("//mat-panel-title");
+  public By allReviews = By.xpath("//div[@class='ng-star-inserted']/div");
 
   public void launchHomePage() {
     launchPage(url);
@@ -43,12 +44,32 @@ public class HomePage extends CommonPage {
     return findElements(itemsPerPageOptions);
   }
 
-  public String getPaginatorRange() {
-    return findElement(paginatorRange).getText();
+  public List<WebElement> getAllItems() {
+    return findElements(allItems);
   }
 
-  public List<WebElement> getAllItemsDisplayed() {
-    return findElements(allItems);
+  public void clickOnItem(int itemNo) {
+    click(getAllItems().get(itemNo - 1));
+  }
+
+  public List<String> getAllItemNames() {
+    return findElements(allItemNames).stream()
+        .map(WebElement::getText)
+        .collect(Collectors.toList());
+  }
+
+  public List<BigDecimal> getAllItemPrices() {
+    return findElements(allItemPrices).stream()
+        .map(e -> new BigDecimal(getAmount(e.getText())))
+        .collect(Collectors.toList());
+  }
+
+  public List<WebElement> getAllAddToBasketBtns() {
+    return findElements(allAddToBasketBtns);
+  }
+
+  public void addItemNoToBasket(int itemNo) {
+    click(getAllAddToBasketBtns().get(itemNo - 1));
   }
 
   public boolean isItemPopupDisplayed() {
@@ -68,5 +89,9 @@ public class HomePage extends CommonPage {
 
   public List<WebElement> getAllReviews() {
     return findElements(allReviews);
+  }
+
+  public void waitTillNoOfItemsInTheBasketUpdatedTo(int i) {
+    wait.until(d -> getNoOfItemsInTheBasket() == i);
   }
 }
