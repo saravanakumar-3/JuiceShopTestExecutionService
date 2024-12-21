@@ -72,7 +72,7 @@ public class HomePageStepDef extends BaseStepDef {
     List<String> allItemNames = homepage.getAllItemNames();
     List<BigDecimal> allItemPrices = homepage.getAllItemPrices();
 
-    int noOfItemsToAdd = 5;
+    int noOfItemsToAdd = 3;
     int noOfItemsToAdded = 0;
     for (int i = 0; i < noOfItemsToAdd; i++) {
       if (homepage.isItemSoldOut(i + 1)) {

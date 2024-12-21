@@ -1,5 +1,8 @@
 package com.juiceshop.test.executionservice.pages;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.juiceshop.test.executionservice.model.Basket;
 import com.juiceshop.test.executionservice.model.Item;
 import java.math.BigDecimal;
@@ -7,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
@@ -87,14 +91,27 @@ public class BasketPage extends CommonPage {
   }
 
   public void waitTillItemQuantityInRowIs(int row, int expQuantity) {
-    wait.until(d -> getItem(row).getQuantity() == expQuantity);
+    try {
+      wait.until(d -> getItem(row).getQuantity() == expQuantity);
+    } catch (TimeoutException e) {
+      assertThat(getItem(row).getQuantity(), is(expQuantity));
+    }
   }
 
   public void waitNoOfRowIs(int expRows) {
-    wait.until(d -> findElements(noOfRows).size() == expRows);
+    try {
+      wait.until(d -> findElements(noOfRows).size() == expRows);
+    } catch (TimeoutException e) {
+      assertThat(findElements(noOfRows).size(), is(expRows));
+    }
   }
 
   public void waitTillTotalPriceIs(BigDecimal expTotalPrice) {
-    wait.until(d -> getTotalPrice().equals(expTotalPrice));
+    try {
+      scrollIntoView(totalPrice);
+      wait.until(d -> getTotalPrice().equals(expTotalPrice));
+    } catch (TimeoutException e) {
+      assertThat(getTotalPrice(), is(expTotalPrice));
+    }
   }
 }

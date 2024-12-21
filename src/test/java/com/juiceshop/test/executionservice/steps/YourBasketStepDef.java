@@ -34,7 +34,7 @@ public class YourBasketStepDef extends BaseStepDef {
     basketPage.decreaseItemQuantity(2);
 
     basketPage.deleteItem(3);
-    basketPage.waitNoOfRowIs(4);
+    basketPage.waitNoOfRowIs(initialBasket.getItems().size() - 1);
     initialBasket.getItems().remove(2);
 
     initialBasket.setTotalPrice(calculateTotalPrice(initialBasket.getItems()));
