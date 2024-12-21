@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="css/cucumber.css" type="text/css"/>
+<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="shortcut icon" href="images/favicon.png"/>
+
+<script>
+$(document).ready(function() {
+    // this will tell tablesorter to try looking for the data-value attribute
+    // if present, it'll sort by that instead
+    // otherwise, it'll sort by the text content of the table cell
+    $("#tablesorter").tablesorter({
+        textAttribute: 'data-value',
+        // ignores the first row of the header, the 'scenario', 'steps', since
+        // sorting those doesn't make sense
+        selectorHeaders: '> thead tr:not(.dont-sort) th',
+        // use a stable sort
+        sortStable: true
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<title>Cucumber Reports  - Steps Overview</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">Cucumber Report</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li role="presentation" ><a href="overview-features.html">Features</a></li>
+        <li role="presentation" ><a href="overview-tags.html">Tags</a></li>
+        <li role="presentation"     class="active" ><a href="overview-steps.html">Steps</a></li>
+        <li role="presentation" ><a href="overview-failures.html">Failures</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-md-5 col-md-offset-1">
+
+<table class="table table-bordered" id="build-info">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info">
+      <td>No Name (add projectName to cucumber-reporting.properties)</td>
+      <td>21 Dec 2024, 20:40</td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+  <div class="col-md-3 col-md-offset-2">
+  </div>
+</div>
+
+
+<div id="report-lead" class="container-fluid">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Steps Statistics</h2>
+      <p>The following graph shows step statistics for this build. Below list is based on results.
+ step does not provide information about result then is not listed below.
+ Additionally @Before and @After are not counted because they are part of the scenarios, not steps.</p>
+  </div>
+</div>
+
+<div class="container-fluid" id="report">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table id="tablesorter" class="stats-table table-hover">
+
+        <thead>
+          <tr class="header">
+            <th>Implementation</th>
+            <th>Occurrences</th>
+            <th>Average duration</th>
+            <th>Max duration</th>
+            <th>Total durations</th>
+            <th>Ratio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.AddressCreateStepDef.userAddsNewAddressAndClicksOnSubmit()</td>
+              <td>1</td>
+              <td class="duration" data-value="840119100">0.840</td>
+              <td class="duration" data-value="840119100">0.840</td>
+              <td class="duration" data-value="840119100">0.840</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.AddressSelectStepDef.userClickOnContinueAfterSelectingAddressAndNavigatedToDeliveryMethodPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="1205587400">1.205</td>
+              <td class="duration" data-value="1205587400">1.205</td>
+              <td class="duration" data-value="1205587400">1.205</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.AddressSelectStepDef.userClicksOnCreateNewAddressAndNavigatedToCreateAddressPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="118539900">0.118</td>
+              <td class="duration" data-value="118539900">0.118</td>
+              <td class="duration" data-value="118539900">0.118</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.CommonStepDef.userCompletesRegistrationAndLoginSuccessfully()</td>
+              <td>1</td>
+              <td class="duration" data-value="6505355400">6.505</td>
+              <td class="duration" data-value="6505355400">6.505</td>
+              <td class="duration" data-value="6505355400">6.505</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.DeliveryMethodStepDef.userClickOnContinueAfterSelectingDeliverySpeedAndNavigatedToPaymentPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="203448700">0.203</td>
+              <td class="duration" data-value="203448700">0.203</td>
+              <td class="duration" data-value="203448700">0.203</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.clickOnGivenProduct(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="86169300">0.086</td>
+              <td class="duration" data-value="86169300">0.086</td>
+              <td class="duration" data-value="86169300">0.086</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.expandsTheReviewSection()</td>
+              <td>1</td>
+              <td class="duration" data-value="627383600">0.627</td>
+              <td class="duration" data-value="627383600">0.627</td>
+              <td class="duration" data-value="627383600">0.627</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.homePageShouldDisplayAllItems(int)</td>
+              <td>1</td>
+              <td class="duration" data-value="22734700">0.022</td>
+              <td class="duration" data-value="22734700">0.022</td>
+              <td class="duration" data-value="22734700">0.022</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.navigateToHomePage()</td>
+              <td>2</td>
+              <td class="duration" data-value="3816142850">3.816</td>
+              <td class="duration" data-value="3816142850">3.963</td>
+              <td class="duration" data-value="7632285700">7.632</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.userAddItemsToBasketAndItemCountReflectedCorrectly()</td>
+              <td>1</td>
+              <td class="duration" data-value="4387226600">4.387</td>
+              <td class="duration" data-value="4387226600">4.387</td>
+              <td class="duration" data-value="4387226600">4.387</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.userClicksOnYourBasket()</td>
+              <td>1</td>
+              <td class="duration" data-value="137172100">0.137</td>
+              <td class="duration" data-value="137172100">0.137</td>
+              <td class="duration" data-value="137172100">0.137</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.userSelectMaximumNumberOfItemsPerPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="231733100">0.231</td>
+              <td class="duration" data-value="231733100">0.231</td>
+              <td class="duration" data-value="231733100">0.231</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.verifyThatProductPopupDisplayed()</td>
+              <td>1</td>
+              <td class="duration" data-value="24536500">0.024</td>
+              <td class="duration" data-value="24536500">0.024</td>
+              <td class="duration" data-value="24536500">0.024</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.HomePageStepDef.verifyTheNoOfReviews()</td>
+              <td>1</td>
+              <td class="duration" data-value="21515700">0.021</td>
+              <td class="duration" data-value="21515700">0.021</td>
+              <td class="duration" data-value="21515700">0.021</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.Hooks.afterScenario(io.cucumber.java.Scenario)</td>
+              <td>4</td>
+              <td class="duration" data-value="160389800">0.160</td>
+              <td class="duration" data-value="160389800">0.167</td>
+              <td class="duration" data-value="641559200">0.641</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.Hooks.beforeScenario()</td>
+              <td>4</td>
+              <td class="duration" data-value="941869950">0.941</td>
+              <td class="duration" data-value="941869950">1.256</td>
+              <td class="duration" data-value="3767479800">3.767</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.LoginPageStepDef.userShouldBeAbleToLoginWithCredentialsRegisteredPreviously()</td>
+              <td>1</td>
+              <td class="duration" data-value="296949600">0.296</td>
+              <td class="duration" data-value="296949600">0.296</td>
+              <td class="duration" data-value="296949600">0.296</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.LoginPageStepDef.userShouldBeNavigatedToLoginPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="22939200">0.022</td>
+              <td class="duration" data-value="22939200">0.022</td>
+              <td class="duration" data-value="22939200">0.022</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.OrderSummaryStepDef.userClickOnPlaceYourOrderAndPayAndNavigatedToOrderCompletionPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="618052800">0.618</td>
+              <td class="duration" data-value="618052800">0.618</td>
+              <td class="duration" data-value="618052800">0.618</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.PaymentStepDef.userClickOnContinueAfterAddingCardDetailsAndNavigatedToPaymentPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="1684308800">1.684</td>
+              <td class="duration" data-value="1684308800">1.684</td>
+              <td class="duration" data-value="1684308800">1.684</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.UserRegistrationPageStepDef.navigateToUserRegistrationPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="4212542900">4.212</td>
+              <td class="duration" data-value="4212542900">4.212</td>
+              <td class="duration" data-value="4212542900">4.212</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.UserRegistrationPageStepDef.userEntersValidInformationInAllFields()</td>
+              <td>1</td>
+              <td class="duration" data-value="1590079700">1.590</td>
+              <td class="duration" data-value="1590079700">1.590</td>
+              <td class="duration" data-value="1590079700">1.590</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.UserRegistrationPageStepDef.userLeaveAllFieldEmptyWithEnteringAnyInputAfterClicking()</td>
+              <td>1</td>
+              <td class="duration" data-value="482876400">0.482</td>
+              <td class="duration" data-value="482876400">0.482</td>
+              <td class="duration" data-value="482876400">0.482</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.UserRegistrationPageStepDef.validationMessageShouldBeDisplayedInAllRespectiveFields()</td>
+              <td>1</td>
+              <td class="duration" data-value="65928600">0.065</td>
+              <td class="duration" data-value="65928600">0.065</td>
+              <td class="duration" data-value="65928600">0.065</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.YourBasketStepDef.allItemsAddedAreDisplayedInBasket()</td>
+              <td>1</td>
+              <td class="duration" data-value="734443200">0.734</td>
+              <td class="duration" data-value="734443200">0.734</td>
+              <td class="duration" data-value="734443200">0.734</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.YourBasketStepDef.totalPriceIsUpdatedWhenItemQuantityIsIncreasedOrDecreasedOrDeleted()</td>
+              <td>1</td>
+              <td class="duration" data-value="2241183400">2.241</td>
+              <td class="duration" data-value="2241183400">2.241</td>
+              <td class="duration" data-value="2241183400">2.241</td>
+              <td class="passed">100.00%</td>
+            </tr>
+            <tr>
+              <td class="location">com.juiceshop.test.executionservice.steps.YourBasketStepDef.userClicksOnCheckoutAndNavigatedToSelectAddressPage()</td>
+              <td>1</td>
+              <td class="duration" data-value="108402200">0.108</td>
+              <td class="duration" data-value="108402200">0.108</td>
+              <td class="duration" data-value="108402200">0.108</td>
+              <td class="passed">100.00%</td>
+            </tr>
+        </tbody>
+
+        <tfoot class="total">
+          <tr>
+            <td>27</td>
+            <td>34</td>
+            <td class="duration">1.132</td>
+            <td class="duration">7.632</td>
+            <td class="duration">38.510</td>
+            <td>Totals</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-default" id="footer">
+  <div class="container-fluid">
+    <p class="navbar-text navbar-right">
+        <small>generate Cucumber HTML reports via:&nbsp;</small>
+        <a class="navbar-link" href="https://github.com/jenkinsci/cucumber-reports-plugin">Jenkins Plugin</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-reporting">Standalone</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/cucumber-sandwich">Sandwich</a> |
+        <a class="navbar-link" href="https://github.com/damianszczepanik/maven-cucumber-reporting">Maven</a>
+        &nbsp;&nbsp;
+    </p>
+  </div>
+</nav>
+
+</body>
+</html>
