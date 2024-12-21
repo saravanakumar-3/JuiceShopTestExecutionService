@@ -1,6 +1,5 @@
-package com.juiceshop.test.executionservice.config;
+package com.juiceshop.test.executionservice.model;
 
-import com.juiceshop.test.executionservice.model.User;
 import io.cucumber.spring.ScenarioScope;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -9,5 +8,6 @@ import org.springframework.stereotype.Component;
 @ScenarioScope
 @Component
 public class TestData {
-  public User user;
+  public User user = new User();
+  public Basket basket = new Basket();
 }

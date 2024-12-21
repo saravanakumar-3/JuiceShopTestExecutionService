@@ -24,6 +24,8 @@ public class WebDriverConfig {
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false);
         prefs.put("password_manager_enabled", false);
+        prefs.put("autofill.profile_enabled", false);
+        prefs.put("profile.default_content_setting_values.notifications", 2);
         chromeOptions.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(chromeOptions);
         break;
